@@ -10,6 +10,7 @@ namespace Domino {
             game.Help();
             while (game.gameIsGoing)
             {
+                game.CanPlayerMove();
                 var action = Console.ReadLine().Trim().ToLower();
                 if (action == "who is moving")
                 {
@@ -23,9 +24,9 @@ namespace Domino {
                 {
                     game.DoAction(Action.TakeDiceFromBazaar);
                 }
-                else if (action == "whatch my dices")
+                else if (action == "watch my dices")
                 {
-                    game.DoAction(Action.WhatchYourHand);
+                    game.DoAction(Action.WatchYourHand);
                 }
                 else if (action == "help")
                 {

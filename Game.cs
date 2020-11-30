@@ -47,7 +47,7 @@ You can use next commands to play:
 Who is moving: if you don`t know which player move now, you can write this command
 Possible moves: show possible moves
 Take dice: takes one dice from bazaar (if bazaar not empty)
-Whatch my dices: show dices in your hand whith there index
+Watch my dices: show dices in your hand whith there index
 Move <index>: put dice whith <index> on table
 Help: write this if you want to see this message again");
         }
@@ -81,7 +81,7 @@ Help: write this if you want to see this message again");
             return fish;
         }
 
-        private bool CheckEndind()
+        private bool CheckEnding()
         {
             if (bazaar.IsEmpty())
             {
@@ -105,6 +105,21 @@ Help: write this if you want to see this message again");
             return false;
         }
 
+        public void CanPlayerMove()
+        {
+            if(CheckEnding())
+                gameIsGoing = false;
+            if (!bazaar.IsEmpty())
+                return;
+            foreach(var dice in players[whichPlayerIsMoving].hand)
+            {
+                if (table.PossibleMove(dice))
+                    return;
+            }
+            Console.WriteLine("This player can`t move\nChanging player");
+            ChangeMovingPlayer();
+        }
+
         public void DoAction(Action action, params int[] param)
         {
             switch (action)
@@ -119,7 +134,7 @@ Help: write this if you want to see this message again");
                     if (!players[whichPlayerIsMoving].TakeDiceFromBazaar())
                         return;
                     break;
-                case Action.WhatchYourHand:
+                case Action.WatchYourHand:
                     players[whichPlayerIsMoving].WatchYourHand();
                     break;
                 case Action.MakeMove:
@@ -134,7 +149,7 @@ Help: write this if you want to see this message again");
                     Console.WriteLine("Unregistred action\nTry again!");
                     return;
             }
-            if (CheckEndind())
+            if (CheckEnding())
                 gameIsGoing = false;
         }
     }

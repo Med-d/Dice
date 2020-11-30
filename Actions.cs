@@ -5,7 +5,7 @@ namespace Domino
         WhoIsMoving,
         PossibleMove,
         TakeDiceFromBazaar,
-        WhatchYourHand,
+        WatchYourHand,
         MakeMove,
         Help,
         Default
