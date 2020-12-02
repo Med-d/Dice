@@ -8,6 +8,7 @@ namespace Domino
         WatchYourHand,
         MakeMove,
         Help,
+        ShowTable,
         Default
     }
 }

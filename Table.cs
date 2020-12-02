@@ -25,13 +25,13 @@ namespace Domino {
 
         public bool PossibleMove(Dice dice)
         {
-            if (leftValue == dice.leftSide)
+            if (leftValue == dice.Left)
                 return true;
-            else if (leftValue == dice.rightSide)
+            else if (leftValue == dice.Right)
                 return true;
-            else if (rightValue == dice.leftSide)
+            else if (rightValue == dice.Left)
                 return true;
-            else if (rightValue == dice.rightSide)
+            else if (rightValue == dice.Right)
                 return true;
             return false;
         }
@@ -39,19 +39,42 @@ namespace Domino {
         public bool MakeMove(Dice dice)
         {
             if (dices.Count == 0)
-                (leftValue, rightValue) = (dice.leftSide, dice.rightSide);
-            else if (leftValue == dice.leftSide)
-                leftValue = dice.rightSide;
-            else if (leftValue == dice.rightSide)
-                leftValue = dice.leftSide;
-            else if (rightValue == dice.leftSide)
-                rightValue = dice.rightSide;
-            else if (rightValue == dice.rightSide)
-                rightValue = dice.leftSide;
-            else
-                return false;
-            dices.Add(dice);
-            return true;
+            {
+                (leftValue, rightValue) = (dice.Left, dice.Right);
+                dices.Add(dice);
+                return true;
+            }
+            for (var i = 0; i < 2; ++i)
+            {
+                if (dice.Left == rightValue)
+                {
+                    rightValue = dice.Right;
+                    dices.Add(dice);
+                    return true;
+                }
+                else if (dice.Right == leftValue)
+                {
+                    leftValue = dice.Left;
+                    dices.Insert(0, dice);
+                    return true;
+                }
+                dice.Rotate();
+            }
+            return false;
+        }
+
+        public void ShowTable()
+        {
+            if (dices.Count == 0)
+            {
+                Console.WriteLine("There is no dices");
+                return;
+            }
+            foreach(var dice in dices)
+            {
+                Console.Write("|{0}|", dice.ToString());
+            }
+            Console.WriteLine("");
         }
     }
 }

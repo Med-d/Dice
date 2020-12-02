@@ -25,14 +25,15 @@ namespace Domino
             var smallestDouble = 7;
             for (var i = 0; i < 7; ++i)
             {
-                if (firstPlayerHand[i].IsDouble() && firstPlayerHand[i].leftSide != 0)
+                if (firstPlayerHand[i].IsDouble() && firstPlayerHand[i].Left != 0)
                 {
-                    smallestDouble = firstPlayerHand[i].leftSide;
+                    smallestDouble = firstPlayerHand[i].Left;
                     whichPlayerIsMoving = 0;
                 }
-                if (secondPlayerHand[i].IsDouble() && secondPlayerHand[i].leftSide != 0 && secondPlayerHand[i].leftSide < smallestDouble)
+                if (secondPlayerHand[i].IsDouble() && secondPlayerHand[i].Left != 0 
+                    && secondPlayerHand[i].Left < smallestDouble)
                 {
-                    smallestDouble = secondPlayerHand[i].leftSide;
+                    smallestDouble = secondPlayerHand[i].Left;
                     whichPlayerIsMoving = 1;
                 }
             }
@@ -49,6 +50,7 @@ Possible moves: show possible moves
 Take dice: takes one dice from bazaar (if bazaar not empty)
 Watch my dices: show dices in your hand whith there index
 Move <index>: put dice whith <index> on table
+Show table: show line of dices on table
 Help: write this if you want to see this message again");
         }
 
@@ -141,6 +143,9 @@ Help: write this if you want to see this message again");
                     if (!players[whichPlayerIsMoving].MakeMove(param[0]))
                         return;
                     ChangeMovingPlayer();
+                    break;
+                case Action.ShowTable:
+                    table.ShowTable();
                     break;
                 case Action.Help:
                     Help();

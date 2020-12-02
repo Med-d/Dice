@@ -4,13 +4,35 @@ namespace Domino
 {
     public class Dice
     {
-        public readonly int leftSide;
-        public readonly int rightSide;
+        private int leftSide;
+        public int Left
+        {
+            get => leftSide;
+            private set
+            {
+                leftSide = value;
+            }
+        }
+
+        private int rightSide;
+        public int Right
+        {
+            get => rightSide;
+            private set
+            {
+                rightSide = value;
+            }
+        }
 
         public Dice(int a, int b)
         {
             leftSide = a;
             rightSide = b;
+        }
+
+        public void Rotate()
+        {
+            (leftSide, rightSide) = (rightSide, leftSide);
         }
 
         public override string ToString()

@@ -5,7 +5,7 @@ namespace Domino {
     {
         private static void Main()
         {
-            Console.WriteLine("Dice v1.0beta by med-d\n");
+            Console.WriteLine("Dice v1.01beta by med-d\n");
             var game = new Game();
             game.Help();
             while (game.gameIsGoing)
@@ -36,6 +36,10 @@ namespace Domino {
                 {
                      game.DoAction(Action.MakeMove, 
                         int.Parse(action.Substring(5, action.Length - 5)));
+                }
+                else if (action == "show table")
+                {
+                    game.DoAction(Action.ShowTable);
                 }
                 else if (action.Length == 0)
                 {
