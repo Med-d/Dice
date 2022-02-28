@@ -42,7 +42,7 @@ namespace Domino
         public void Help()
         {
             Console.WriteLine(
-                @"Welcome! This is the worst console-using game ever! Yeah, it is a dice on one PC
+                @"Welcome! This is the console-using gam! It is a dice on one PC
 You can use next commands to play:
 
 Who is moving: if you don`t know which player move now, you can write this command
